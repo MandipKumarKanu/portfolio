@@ -1,0 +1,117 @@
+.skill {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.skill-btm {
+  width: 70%;
+}
+
+.skill-summary {
+  font-size: 24px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.ans {
+  margin: 0 50px;
+  overflow: hidden;
+  max-height: 0; /* Initially closed */
+  transition: max-height 0.3s ease-in-out;
+}
+
+.ans.open {
+  max-height: 400px; /* Adjust as needed for opened state */
+}
+
+.name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ans1 {
+  margin-bottom: 15px;
+}
+
+progress {
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  background-color: rgb(77, 64, 118);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-value {
+  background-color: rgb(77, 64, 118);
+}
+
+.ico-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ico-name span {
+  font-size: 25px;
+}
+
+.skill-out {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 38px;
+}
+
+.skill-summary:hover {
+  background-color: rgb(77, 64, 118);
+}
+
+.skill-summary.opened {
+  background-color: rgb(77, 64, 118);
+}
+
+.drop-down.rotate {
+  transform: rotate(-180deg);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 20px 0;
+}
+
+@media (max-width: 834px) {
+  progress {
+    height: 10px;
+  }
+
+  .skill-out {
+    padding: 0;
+  }
+
+  .skill-btm {
+    width: 100%;
+  }
+
+  .ans {
+    margin: 0 20px;
+  }
+
+  .skillll {
+    font-size: 1.1rem;
+  }
+}

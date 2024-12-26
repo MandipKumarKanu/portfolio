@@ -1,0 +1,12 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+a:visited {
+  text-decoration: none;
+  color: initial;
+}
+
+* {
+  outline: none;
+}

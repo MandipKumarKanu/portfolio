@@ -1,0 +1,103 @@
+#footer{
+    position: absolute;
+    width: 100%;
+    padding: 40px 0 60px;
+}
+.footer {
+    height: 400px;
+    width: 100%;
+}
+
+.footer,
+.hi-up,
+.hi-down,
+.say-hi,
+.f-ico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.say-hi {
+    min-height: 320px;
+    min-width: 320px;
+    border: 2px dashed var(--secondary-color);
+    border-radius: 50%;
+    gap: 20px;
+    background-color: rgb(25, 20, 42);
+    z-index: 1;
+}
+
+.hi-up h1{
+    color: rgb(201, 181, 80);
+}
+
+
+
+.hi-down {
+    flex-direction: row;
+    gap: 20px;
+}
+
+.f-ico {
+    font-size: 22px;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.f-ico:hover {
+    filter: brightness(0.9);
+}
+
+.f-ico:active {
+    filter: brightness(1.1);
+    transform: translateY(2px);
+}
+
+.facebook {
+    background: rgb(46, 46, 121);
+}
+
+.twitter {
+    background: #000;
+}
+
+.instagram {
+    background: linear-gradient(45deg,
+            #f09433 0%,
+            #e6683c 25%,
+            #dc2743 50%,
+            #cc2366 75%,
+            #4862c9 100%);
+}
+
+.hi-up hr{
+    width: 120%;
+}
+
+.designed{
+    z-index: 1;
+}
+
+.designed a{
+    text-decoration: 2px underline wavy;
+    text-transform: uppercase;
+    color: rgb(201, 181, 80);    
+}
+
+.hi-up h4 a {
+    text-decoration: none;
+    color: #efefef;
+}
+
+.hi-up h4 {
+    margin-top: 10px;
+}
+
+.footer hr{
+    width: 90%;
+}
