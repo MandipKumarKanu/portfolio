@@ -89,7 +89,7 @@ const Navbar = () => {
       <div className="nav">
         <input type="checkbox" id="nav-check" className="check-menu" />
         <div className="nav-left">
-          <h3 onClick={() => scrollToSection("main")}>Mandy</h3>
+          <h3 onClick={() => scrollToSection("main")}>Mandip</h3>
         </div>
         <div className="nav-btn">
           <label
