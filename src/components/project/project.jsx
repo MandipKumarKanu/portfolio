@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Code, Link as LinkIcon } from "lucide-react";
 import "./project.css";
+import { Parallax } from 'react-scroll-parallax';
 
 const projects = [
   {
@@ -109,101 +110,105 @@ const Project = () => {
       : projects.filter((project) => project.category === activeTab);
 
   return (
-    <section id="project" className="project-section">
-      <div className="project-header">
-        <h2 className="project-title">My Projects</h2>
-        <p className="project-subtitle">
-          Innovative solutions and creative digital experiences crafted with
-          passion
-        </p>
-      </div>
+    <Parallax speed={-8}>
+      <section id="project" className="project-section" data-aos="zoom-in"> {/* Added data-aos for section */}
+        <div className="project-header" data-aos="fade-down"> {/* Inner element animation */}
+          <h2 className="project-title">My Projects</h2>
+          <p className="project-subtitle">
+            Innovative solutions and creative digital experiences crafted with
+            passion
+          </p>
+        </div>
 
-      <div className="project-tabs">
-        {["All", "Personal", "Professional"].map((tab) => (
-          <button
-            key={tab}
-            className={`project-tab ${activeTab === tab ? "active" : ""}`}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+        <div className="project-tabs" data-aos="fade-down" data-aos-delay="100"> {/* Inner element animation */}
+          {["All", "Personal", "Professional"].map((tab) => (
+            <button
+              key={tab}
+              className={`project-tab ${activeTab === tab ? "active" : ""}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-      <div className="project-grid">
-        {filteredProjects.map((project, index) => (
-          <div
-            key={index}
-            className={`project-card ${
-              activeProject === index ? "active" : ""
-            }`}
-            onMouseEnter={() => setActiveProject(index)}
-            onMouseLeave={() => setActiveProject(null)}
-          >
-            <div className="project-image-container">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="project-image"
-                loading="lazy"
-              />
-              <div className="project-overlay">
-                <h3 className="project-overlay-title">{project.title}</h3>
-                <p className="project-overlay-description">
-                  {project.description}
-                </p>
-                {project.note && <p className="project-note">{project.note}</p>}
-                <div className="project-tags">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="project-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="project-links">
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      <LinkIcon size={20} />
-                      Live
-                    </a>
-                  )}
-                  {project.gitLink && (
-                    <a
-                      href={project.gitLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      <Code size={20} />
-                      Code
-                    </a>
-                  )}
+        <div className="project-grid">
+          {filteredProjects.map((project, index) => (
+            <div
+              key={index}
+              className={`project-card ${
+                activeProject === index ? "active" : ""
+              }`}
+              onMouseEnter={() => setActiveProject(index)}
+              onMouseLeave={() => setActiveProject(null)}
+              data-aos="fade-up" // AOS for individual project cards
+              data-aos-delay={index * 100} // Staggered delay
+            >
+              <div className="project-image-container">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-image"
+                  loading="lazy"
+                />
+                <div className="project-overlay">
+                  <h3 className="project-overlay-title">{project.title}</h3>
+                  <p className="project-overlay-description">
+                    {project.description}
+                  </p>
+                  {project.note && <p className="project-note">{project.note}</p>}
+                  <div className="project-tags">
+                    {project.tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className="project-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="project-links">
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <LinkIcon size={20} />
+                        Live
+                      </a>
+                    )}
+                    {project.gitLink && (
+                      <a
+                        href={project.gitLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <Code size={20} />
+                        Code
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {((projects.length > 4 && windowWidth < 768) ||
-        (projects.length > 8 && windowWidth >= 768)) && (
-        <div className="view-all-container">
-          <a
-            href="https://github.com/MandipKumarKanu"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="view-all-button"
-          >
-            View All Projects
-          </a>
+          ))}
         </div>
-      )}
-    </section>
+
+        {((projects.length > 4 && windowWidth < 768) ||
+          (projects.length > 8 && windowWidth >= 768)) && (
+          <div className="view-all-container" data-aos="fade-up" data-aos-delay="200"> {/* Inner element animation */}
+            <a
+              href="https://github.com/MandipKumarKanu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="view-all-button"
+            >
+              View All Projects
+            </a>
+          </div>
+        )}
+      </section>
+    </Parallax>
   );
 };
 

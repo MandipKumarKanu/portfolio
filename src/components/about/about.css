@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 40px 20px;
+  padding: 50px 20px; /* Increased top/bottom padding */
   background: linear-gradient(135deg, rgb(42, 35, 68), rgb(30, 25, 50));
   color: #ffffff;
   position: relative;
@@ -21,7 +21,7 @@
     radial-gradient(white 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
-  opacity: 0.1;
+  opacity: 0.08; /* Slightly reduced opacity */
   z-index: 0;
 }
 
@@ -29,29 +29,34 @@
   width: 100%;
   max-width: 1200px;
   position: relative;
+  z-index: 1; /* Ensure content is above the ::before pseudo-element */
 }
 
 .abt-top {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px; /* Increased margin-bottom */
 }
 
 .abt-top h2 {
-  font-size: 36px;
+  font-size: 36px; /* Poppins */
+  font-weight: 600; /* Adjusted weight for Poppins */
   text-transform: uppercase;
   margin: 0;
+  color: #fff;
 }
 
 .abt-top p {
-  font-size: 18px;
+  font-size: 1.1rem; /* Adjusted size */
   margin: 10px 0 0;
-  color: rgba(200, 200, 200, 0.9);
+  color: rgba(220, 220, 220, 0.85); /* Slightly adjusted color */
+  font-weight: 400;
 }
 
 .abt-btm {
   display: flex;
   justify-content: space-between;
   gap: 40px;
+  align-items: flex-start; /* Align items to the start for better structure */
 }
 
 .abt-left {
@@ -67,13 +72,14 @@
   perspective: 1000px;
   background: #282836;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15); /* Slightly enhanced shadow */
   overflow: hidden;
-  transition: transform 0.5s;
+  transition: transform 0.5s, box-shadow 0.5s;
 }
 
 .abt-img-container:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(var(--secondary-color), 0.3); /* Use secondary color for hover glow */
 }
 
 .newImg {
@@ -88,115 +94,152 @@
 }
 
 .abt-right {
-  flex: 1;
-  padding: 30px 25px;
+  flex: 1.2; /* Give slightly more space to text content */
+  padding: 30px; /* Uniform padding */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 25px;
+  justify-content: flex-start; /* Align content to start */
+  gap: 20px; /* Adjusted gap */
   color: #ffffff;
-  border: 2px dashed var(--secondary-color);
-  border-top-right-radius: 50px;
+  border: 1px solid rgba(var(--secondary-color), 0.5); /* Softer border */
+  border-top-right-radius: 50px; /* Keeping this distinct feature */
+  background-color: rgba(38, 31, 61, 0.3); /* Subtle background to differentiate */
 }
 
 .abt-heading {
-  font-size: 26px;
+  font-size: 1.75rem; /* Adjusted size (approx 28px) */
   color: #ffe5e5;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+  font-weight: 600; /* Adjusted weight */
+  text-align: left; /* Changed from center */
+  margin-bottom: 5px; /* Adjusted margin */
+  letter-spacing: 0.5px; /* Adjusted spacing */
 }
 
 .abt-description {
-  font-size: 15px;
-  line-height: 1.7;
-  color: rgba(255, 235, 235, 0.9);
-  text-align: justify;
+  font-size: 1rem; /* Adjusted size (16px) */
+  line-height: 1.75; /* Increased for readability */
+  color: rgba(235, 235, 235, 0.85); /* Adjusted color */
+  text-align: left; /* Changed from justify */
+  margin-bottom: 10px; /* Added margin */
 }
 
 .abt-stats {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around; /* Better distribution */
   gap: 15px;
+  margin-top: 10px; /* Added margin */
 }
 
 .abt-card {
   flex: 1;
   text-align: center;
-  background: rgb(77, 64, 118);
-  padding: 15px 10px;
+  background: rgba(77, 64, 118, 0.7); /* Slightly more transparent */
+  padding: 20px 15px; /* Adjusted padding */
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(51, 38, 66, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .abt-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(46, 42, 94, 0.7);
+  box-shadow: 0 8px 25px rgba(var(--secondary-color),0.25); /* Use secondary color for hover */
 }
 
 .abt-card h4 {
-  font-size: 22px;
-  color: #ffd6d6;
-  margin-bottom: 5px;
+  font-size: 1.8rem; /* Adjusted size (approx 28-29px) */
+  color: #fff; /* Brighter color */
+  margin-bottom: 8px; /* Adjusted margin */
+  font-weight: 600;
 }
 
 .abt-card p {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 5px 0 0;
+  font-size: 0.9rem; /* Adjusted size (approx 14-15px) */
+  color: rgba(220, 220, 220, 0.9); /* Adjusted color */
+  margin: 0; /* Reset margin */
+  font-weight: 400;
 }
 
 .card-icon {
-  font-size: 18px;
+  font-size: 1.2rem; /* Adjusted size */
   color: #ffd6d6;
-  margin-top: 8px;
+  margin-top: 10px; /* Adjusted margin */
+}
+
+.abt-cta {
+  margin-top: 15px; /* Added margin to separate from stats */
+  text-align: center; /* Center the button container */
 }
 
 .download-btn {
-  display: block;
+  display: inline-block; /* Changed from block */
   background: var(--secondary-color);
   color: #ffffff;
-  padding: 12px 25px;
+  padding: 12px 30px; /* Adjusted padding */
   border: none;
   border-radius: 30px;
-  font-size: 16px;
-  text-align: center;
+  font-size: 1rem; /* Adjusted size */
+  font-weight: 500; /* Added weight */
   cursor: pointer;
-  margin: 0 auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(92, 52, 52, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(var(--secondary-color), 0.3);
 }
 
 .download-btn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(92, 52, 52, 0.6);
-
+  box-shadow: 0 6px 20px rgba(var(--secondary-color), 0.4);
+  background-color: lighten(var(--secondary-color), 5%); /* Lighten on hover */
 }
 
 .download-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 8px 20px rgba(46, 42, 94, 0.6);
+  transform: translateY(0px); /* Adjusted active state */
+  box-shadow: 0 4px 10px rgba(var(--secondary-color), 0.3);
 }
 
 @media (max-width: 882px) {
   .abt-btm {
     flex-direction: column;
-    gap: 20px;
+    gap: 30px; /* Adjusted gap */
+    align-items: center; /* Center items in column layout */
   }
 
   .abt-left,
   .abt-right {
     width: 100%;
+    max-width: 500px; /* Max width for content on mobile */
   }
-
+  
   .abt-right {
-    padding: 20px;
+    padding: 25px; /* Adjusted padding */
+    flex: 1; /* Reset flex property */
   }
 
   .abt-stats {
-    flex-direction: column;
+    flex-direction: row; /* Keep as row if space allows or change to column if needed */
+    gap: 10px;
   }
+  .abt-card h4 {
+    font-size: 1.6rem;
+  }
+  .abt-card p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+    .abt-stats {
+        flex-direction: column; /* Stack stats cards on very small screens */
+    }
+    .abt-top h2 {
+        font-size: 2rem; /* Adjust for very small screens */
+    }
+    .abt-top p {
+        font-size: 1rem;
+    }
+    .abt-heading {
+        font-size: 1.5rem;
+    }
+    .abt-description {
+        font-size: 0.95rem;
+    }
 }

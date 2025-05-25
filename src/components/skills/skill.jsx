@@ -17,6 +17,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { SiCplusplus, SiCsharp, SiMongodb, SiPython } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
+import { Parallax } from 'react-scroll-parallax';
 
 const Skill = () => {
   const skillCategories = [
@@ -102,68 +103,73 @@ const Skill = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
-    // If the clicked index is already open, close it, otherwise set it as open
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="skill">
-      <div className="skill">
-        <div className="abt-top">
-          <h2>SKILLS</h2>
-          <p>My Technical Level</p>
-        </div>
-        <div className="skill-out">
-          <div className="skill-btm">
-            {skillCategories.map((category, index) => (
-              <div key={index}>
-                <div
-                  className={`skill-summary ${
-                    openIndex === index ? "opened" : ""
-                  }`}
-                  onClick={() => handleToggle(index)}
-                >
-                  <h4 className="skillll">
+    <Parallax speed={-7}>
+      <section id="skill" data-aos="zoom-in-up"> {/* Added data-aos */}
+        <div className="skill">
+          <div className="abt-top">
+            <h2>SKILLS</h2>
+            <p>My Technical Level</p>
+          </div>
+          <div className="skill-out">
+            <div className="skill-btm">
+              {skillCategories.map((category, index) => (
+                <div key={index}>
+                  <div
+                    className={`skill-summary ${
+                      openIndex === index ? "opened" : ""
+                    }`}
+                    onClick={() => handleToggle(index)}
+                    // Consider adding data-aos to skill-summary if .ans1 proves difficult
+                    // data-aos="fade-right" 
+                  >
+                    <h4 className="skillll">
+                      <span>
+                        <FontAwesomeIcon icon={faCode} />
+                        {"    "}
+                      </span>
+                      {category.name}
+                    </h4>
                     <span>
-                      <FontAwesomeIcon icon={faCode} />
-                      {"    "}
-                    </span>
-                    {category.name}
-                  </h4>
-                  <span>
-                    <FontAwesomeIcon
-                      icon={faCaretDown}
-                      className={`drop-down ${
-                        openIndex === index ? "rotate" : ""
-                      }`}
-                    />
-                  </span>
-                </div>
-                <div className={`ans ${openIndex === index ? "open" : ""}`}>
-                  {category.skills.map((skill, skillIndex) => (
-                    <div className="ans1" key={skillIndex}>
-                      <div className="name">
-                        <div className="ico-name">
-                          <span>{skill.icon}</span>
-                          {skill.name}
-                        </div>
-                        <div>{skill.progress}%</div>
-                      </div>
-                      <progress
-                        className="progress"
-                        value={skill.progress}
-                        max="100"
+                      <FontAwesomeIcon
+                        icon={faCaretDown}
+                        className={`drop-down ${
+                          openIndex === index ? "rotate" : ""
+                        }`}
                       />
-                    </div>
-                  ))}
+                    </span>
+                  </div>
+                  <div className={`ans ${openIndex === index ? "open" : ""}`}>
+                    {category.skills.map((skill, skillIndex) => (
+                      // Applying AOS to individual skill items (.ans1)
+                      // This might need testing with the accordion opening
+                      <div className="ans1" key={skillIndex} data-aos="fade-up" data-aos-delay={skillIndex * 50}>
+                        <div className="name">
+                          <div className="ico-name">
+                            <span>{skill.icon}</span>
+                            {skill.name}
+                          </div>
+                          <div>{skill.progress}%</div>
+                        </div>
+                        <progress
+                          className="progress"
+                          value={skill.progress}
+                          max="100"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Parallax>
   );
 };
 

@@ -77,15 +77,37 @@
   background: rgba(214, 34, 59, 0.05);
 }
 
-.main-left h3 {
+.main-left h3 { /* Welcome I'm */
   background: rgb(83, 24, 46);
   display: inline-block;
-  padding: 6px;
+  padding: 8px 10px; /* Slightly increased padding */
+  font-size: 1.15rem; /* Explicit font size */
+  font-weight: 500;   /* Explicit font weight */
+  margin-bottom: 10px; /* Spacing below */
 }
 
-.main-left h2 {
-  font-size: 2.6rem;
+.main-left h2.name { /* Name */
+  font-size: 2.8rem; /* Slightly increased size */
+  font-weight: 600;   /* Bolder weight */
+  letter-spacing: -0.5px; /* Tighter letter spacing */
+  margin-bottom: 8px; /* Spacing below name */
+  line-height: 1.2;
 }
+
+.main-left h4 { /* Frontend Developer */
+  font-size: 1.4rem; /* Size for role */
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85); /* Slightly softer color */
+  margin-bottom: 15px; /* Spacing below role */
+}
+
+.main-left p { /* Description paragraph */
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75); /* Softer color for paragraph */
+  margin-bottom: 25px; /* Increased space before CTA */
+}
+
 
 .main-side {
   width: 10%;
@@ -100,7 +122,7 @@
 .main-last {
   transform: rotate(90deg);
   width: max-content;
-  font-size: 1.15rem;
+  font-size: 1.1rem; /* Adjusted size */
   color: var(--secondary-color);
 }
 
@@ -125,10 +147,10 @@
 
 .cta {
   position: relative;
-  margin: auto;
-  margin-top: 25px;
-  padding: 12px 18px;
-  transition: all 0.2s ease;
+  margin: 0; /* Changed from auto to align with text */
+  margin-top: 25px; /* This was already there, kept it */
+  padding: 12px 20px; /* Adjusted padding */
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease; 
   border: none;
   background: none;
   cursor: pointer;
@@ -141,17 +163,18 @@
   left: 0;
   display: block;
   border-radius: 50px;
-  background: blue;
+  background: blue; 
   width: 45px;
   height: 45px;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+  z-index: -1; 
 }
 
 .cta span {
   position: relative;
-  font-family: "Ubuntu", sans-serif;
-  font-size: 18px;
-  font-weight: 700;
+  font-family: "Ubuntu", sans-serif; /* This is not Poppins, but as it was, I'll leave it. Task says Poppins should be maintained (globally). */
+  font-size: 17px; /* Slightly adjusted */
+  font-weight: 600; /* Adjusted weight */
   letter-spacing: 0.05em;
   color: #fff;
 }
@@ -166,25 +189,32 @@
   stroke: rgb(253, 253, 253);
   stroke-width: 2;
   transform: translateX(-5px);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}
+
+.cta:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0,0,0,0.2);
 }
 
 .cta:hover:before {
   width: 100%;
-  background: var(--secondary-color);
+  background: var(--secondary-color); 
 }
 
 .cta:hover svg {
-  transform: translateX(0);
+  transform: translateX(0); 
 }
 
 .cta:active {
-  transform: scale(0.95);
+  transform: scale(0.95) translateY(0); 
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.15); 
 }
 
 @media (max-width: 930px) {
   .main {
     margin-left: 150px;
+    /* Consider reducing height for smaller screens if content feels too spaced out */
   }
 
   .main-side {
@@ -195,11 +225,29 @@
   .main-left {
     width: 100%;
     min-width: unset;
+    text-align: center; /* Center text for stacked layout */
+  }
+  
+  .main-left {
+    padding-left: 20px; /* Original padding */
+    padding-right: 20px; /* Added for balance */
   }
 
-  .main-left {
-    padding-left: 20px;
+  .main-left h2.name {
+    font-size: 2.5rem; /* Adjust for smaller screens */
   }
+  .main-left h4 {
+    font-size: 1.3rem; /* Adjust for smaller screens */
+  }
+  .main-left p {
+    font-size: 0.95rem; /* Adjust for smaller screens */
+  }
+  .cta {
+    margin-left: auto; /* Center CTA button */
+    margin-right: auto; /* Center CTA button */
+    display: table; /* Helps with auto margin centering for button-like elements */
+  }
+
 
   .main-right {
     margin-top: 75px;
@@ -221,7 +269,7 @@
   }
 
   .cta:hover svg {
-    transform: rotate(90deg);
+    transform: translateX(0) rotate(-90deg); 
   }
 }
 
@@ -229,7 +277,31 @@
   .main {
     margin-left: unset;
     width: 100%;
+    padding-top: 20px; /* Add some top padding */
+    padding-bottom: 20px; /* Add some bottom padding */
+    height: auto; /* Allow height to adjust to content */
   }
+  
+  .main-left {
+    padding: 0 15px; /* Consistent padding for mobile */
+    margin-left: 0; /* Reset margin */
+    order: 2; /* Ensure text is below image */
+  }
+  .main-right {
+    margin-top: 20px;
+    order: 1; /* Image first */
+  }
+
+  .main-left h2.name {
+    font-size: 2.2rem; /* Further adjust for mobile */
+  }
+  .main-left h4 {
+    font-size: 1.2rem; /* Further adjust for mobile */
+  }
+   .main-left p {
+    font-size: 0.9rem; /* Further adjust for mobile */
+  }
+
 
   .main-last {
     width: 100%;
@@ -246,7 +318,8 @@
   .main-side {
     width: 100%;
     margin: 0;
-    margin-top: 85px;
+    margin-top: 40px; /* Reduced margin */
+    order: 3;
   }
 
   .main-last {
@@ -262,20 +335,13 @@
   .main-last .main-ico:hover {
     transform: rotate(0deg) scale(1.8);
   }
-
-  .main-left {
-    padding: 0;
-    margin-left: 32px;
-  }
-
-  .main-right {
-    margin-top: 20px;
-  }
 }
 
 @media (max-height: 790px) {
+  /* These rules might conflict with mobile layout if height is too constrained */
+  /* Consider if these are still needed or should be adjusted for smaller viewports */
   .main-right .img-container img {
-    max-width: 180px;
+    max-width: 180px; /* This is quite small, might be okay for specific height constraints */
     max-height: 180px;
   }
 

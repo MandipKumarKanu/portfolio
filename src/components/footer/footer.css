@@ -1,69 +1,112 @@
 #footer{
-    position: absolute;
+    position: relative; /* Changed from absolute to allow natural flow */
     width: 100%;
-    padding: 40px 0 60px;
+    padding: 60px 20px 30px; /* Adjusted padding: more top, less bottom, added horizontal */
+    background-color: rgb(20, 15, 35); /* Added a subtle background for footer */
+    border-top: 1px solid rgba(255,255,255,0.05); /* Subtle top border */
 }
-.footer {
-    height: 400px;
+
+.footer { /* This class seems to be the main container within #footer */
+    /* height: 400px; /* Removed fixed height */
     width: 100%;
+    max-width: 700px; /* Max width for footer content */
+    margin: 0 auto; /* Center content */
+    /* display, justify-content, align-items, flex-direction are on child elements */
 }
 
 .footer,
 .hi-up,
 .hi-down,
 .say-hi,
-.f-ico {
+.f-ico { /* This rule applies to multiple elements, ensure it makes sense for all */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.say-hi {
-    min-height: 320px;
-    min-width: 320px;
+.say-hi { /* The large circle */
+    min-height: 300px; /* Adjusted size */
+    min-width: 300px;  /* Adjusted size */
+    max-height: 320px; /* Max size */
+    max-width: 320px;  /* Max size */
     border: 2px dashed var(--secondary-color);
     border-radius: 50%;
-    gap: 20px;
+    gap: 15px; /* Reduced gap */
     background-color: rgb(25, 20, 42);
     z-index: 1;
+    padding: 20px; /* Added padding inside the circle */
+    text-align: center; /* Ensure text inside is centered */
+    margin-bottom: 40px; /* Space below the circle */
 }
 
-.hi-up h1{
+.hi-up h1{ /* "Say Hi" text */
     color: rgb(201, 181, 80);
+    font-size: 2rem; /* Adjusted size - Poppins */
+    font-weight: 600; /* Semibold */
+    margin: 0 0 5px 0; /* Adjusted margin */
+    line-height: 1.2;
+}
+
+.hi-up hr{
+    width: 80%; /* Reduced width */
+    border: none;
+    border-top: 1px solid rgba(201, 181, 80, 0.5); /* Styled hr */
+    margin-bottom: 10px; /* Space after hr */
+}
+
+.hi-up h4 { /* Email below "Say Hi" */
+    margin-top: 5px; /* Adjusted margin */
+    font-size: 1rem; /* Poppins */
+    font-weight: 400; /* Regular */
+}
+
+.hi-up h4 a {
+    text-decoration: none;
+    color: rgba(239, 239, 239, 0.85); /* Softer color */
+    transition: color 0.3s ease;
+}
+.hi-up h4 a:hover {
+    color: var(--secondary-color);
 }
 
 
-
-.hi-down {
+.hi-down { /* Social icons container */
     flex-direction: row;
-    gap: 20px;
+    gap: 15px; /* Reduced gap */
+    margin-top: 10px; /* Space above icons if h4 is present */
 }
 
-.f-ico {
-    font-size: 22px;
-    padding: 5px;
-    width: 40px;
-    height: 40px;
+.f-ico { /* Social icon wrapper */
+    font-size: 1.1rem; /* Icon size itself (FontAwesome might need this on <i> or <svg>) */
+    padding: 0; /* Remove padding if icon itself has size */
+    width: 42px;  /* Slightly increased */
+    height: 42px; /* Slightly increased */
     border-radius: 50%;
     cursor: pointer;
+    display: flex; /* Already set by common rule, but reaffirming for clarity */
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    color: #fff; /* Icon color */
 }
 
 .f-ico:hover {
     filter: brightness(0.9);
+    transform: scale(1.1); /* Added scale effect */
 }
 
 .f-ico:active {
     filter: brightness(1.1);
-    transform: translateY(2px);
+    transform: translateY(1px) scale(1.05); /* Adjusted active state */
 }
 
 .facebook {
-    background: rgb(46, 46, 121);
+    background: #3b5998; /* Standard FB blue */
 }
 
 .twitter {
-    background: #000;
+    background: #000; /* Standard X/Twitter black */
 }
 
 .instagram {
@@ -72,32 +115,73 @@
             #e6683c 25%,
             #dc2743 50%,
             #cc2366 75%,
+            #bc1888 90%, /* Adjusted gradient for common Insta look */
             #4862c9 100%);
 }
 
-.hi-up hr{
-    width: 120%;
-}
 
-.designed{
-    z-index: 1;
+.designed{ /* "Designed by..." text container */
+    z-index: 1; /* Ensure it's above background elements if any */
+    margin-top: 40px; /* Space above this text */
+    font-size: 0.9rem; /* Adjusted size - Poppins */
+    color: rgba(220, 220, 220, 0.7); /* Softer color */
+    font-weight: 400;
+    text-align: center; /* Ensure it's centered */
 }
 
 .designed a{
-    text-decoration: 2px underline wavy;
+    text-decoration: underline wavy rgba(201, 181, 80, 0.7); /* Wavy underline with color */
+    text-underline-offset: 3px; /* Adjust offset */
     text-transform: uppercase;
-    color: rgb(201, 181, 80);    
+    color: rgb(201, 181, 80);
+    font-weight: 500; /* Medium weight for link */
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+.designed a:hover {
+    color: lighten(rgb(201, 181, 80), 10%);
+    text-decoration-color: lighten(rgb(201, 181, 80), 10%);
 }
 
-.hi-up h4 a {
-    text-decoration: none;
-    color: #efefef;
+
+.footer hr{ /* General hr within .footer, likely for copyright separation */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Max width for this specific hr */
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Subtle hr */
+    margin: 30px auto; /* Center and provide spacing */
 }
 
-.hi-up h4 {
-    margin-top: 10px;
-}
+/* Copyright text specific styling if needed - assuming .designed is the copyright area */
+/* Example: */
+/* .copyright-text { */
+/*   font-size: 0.85rem; */
+/*   color: rgba(255,255,255,0.5); */
+/*   text-align: center; */
+/* } */
 
-.footer hr{
-    width: 90%;
+@media (max-width: 480px) {
+    #footer {
+        padding: 40px 15px 20px; /* Adjust padding for mobile */
+    }
+    .say-hi {
+        min-height: 260px;
+        min-width: 260px;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    .hi-up h1 {
+        font-size: 1.8rem;
+    }
+    .hi-up h4 {
+        font-size: 0.9rem;
+    }
+    .f-ico {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem; /* Adjust icon size if needed */
+    }
+    .designed {
+        font-size: 0.8rem;
+        margin-top: 30px;
+    }
 }

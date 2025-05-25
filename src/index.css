@@ -29,6 +29,7 @@ a {
 body {
   background: var(--primary-color);
   color: var(--font-color);
+  line-height: 1.6; /* Added for better default readability */
 }
 
 a:visited {

@@ -3,16 +3,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: rgb(42, 35, 68);
+  /* background: rgb(42, 35, 68); /* Duplicated background, removing one */
   position: relative;
-  padding: 40px 0;
-}
-
-#contact {
+  padding: 50px 20px; /* Consistent with other sections */
   background: linear-gradient(135deg, rgb(42, 35, 68), rgb(30, 25, 50));
   color: #ffffff;
-  position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Keep overflow hidden */
 }
 
 #contact::before {
@@ -26,190 +22,258 @@
     radial-gradient(white 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
-  opacity: 0.1;
-  z-index: 1;
+  opacity: 0.08; /* Consistent with About */
+  z-index: 1; /* Ensure it's behind content */
 }
 
+/* .abt-top styles from about.css will apply for section title */
+/* If specific overrides are needed for .contact .abt-top, they can be added */
+/* e.g., .contact .abt-top { margin-bottom: 40px; } */
+
 .container {
-  width: 85%;
-  background: rgba(25, 20, 42, 0.7);
-  border-radius: 6px;
-  padding: 20px 60px 30px 40px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  z-index: 3;
+  width: 100%; /* Full width for responsiveness */
+  max-width: 1000px; /* Max width for the contact form container */
+  background: rgba(25, 20, 42, 0.8); /* Slightly more opaque */
+  border-radius: 8px; /* Softer radius */
+  padding: 35px 40px; /* Adjusted padding */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  z-index: 2; /* Above pseudo-element */
+  margin-top: 20px; /* Space after section title if .abt-top is used */
 }
 
 .container .content {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Align items to top */
   justify-content: space-between;
+  gap: 40px; /* Gap between left and right side */
 }
 
 .container .content .left-side {
-  width: 40%;
-  height: 100%;
+  width: 35%; /* Adjusted width */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 15px;
+  gap: 25px; /* Gap between details */
+  margin-top: 5px; /* Align with form fields better */
   position: relative;
 }
 
-.content .left-side::before {
+.content .left-side::before { /* Vertical separator line */
   content: "";
   position: absolute;
-  height: 70%;
-  width: 2px;
-  right: -15px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #afafb6;
+  height: calc(100% - 20px); /* Adjusted height */
+  width: 1px; /* Thinner line */
+  right: -20px; /* Positioned in the middle of the gap */
+  top: 10px;
+  background: rgba(255, 255, 255, 0.2); /* Softer color */
 }
 
 .content .left-side .details {
-  margin: 14px;
-  text-align: center;
+  margin: 0; /* Reset margin */
+  text-align: left; /* Align text to left */
 }
 
 .content .left-side .details .contact-ico {
-  font-size: 30px;
-  color: rgb(119, 27, 51);
-  margin-bottom: 10px;
+  font-size: 1.5rem; /* Adjusted size (24px) */
+  color: var(--secondary-color); /* Use theme color */
+  margin-bottom: 8px; /* Adjusted margin */
+  display: inline-block; /* To align with text */
+  vertical-align: middle;
+  margin-right: 10px; /* Space between icon and text block */
 }
 
 .content .left-side .details .topic {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 1.1rem; /* Approx 17-18px - Poppins */
+  font-weight: 500; /* Medium weight */
+  color: rgba(255, 255, 255, 0.95);
+  display: inline-block; /* Align if icon is next to it or part of it */
 }
 
 .content .left-side .details .text-one,
 .content .left-side .details .text-two {
-  font-size: 14px;
-  color: #afafb6;
+  font-size: 0.9rem; /* Approx 14-15px - Poppins */
+  color: rgba(220, 220, 220, 0.8); /* Softer color */
+  line-height: 1.5;
+  display: block; /* Ensure they stack correctly */
+  margin-left: 34px; /* Indent text under topic if icon is present */
 }
+.content .left-side .details .text-one:first-of-type {
+  margin-top: 2px; /* Small space after topic */
+}
+
 
 .container .content .right-side {
-  width: 60%;
-  margin-left: 75px;
+  width: 60%; /* Adjusted width */
+  /* margin-left: 75px; /* Removed fixed margin, using gap now */
 }
 
-.content .right-side .topic-text {
-  font-size: 23px;
-  font-weight: 600;
+.content .right-side .topic-text { /* "Send us a message" */
+  font-size: 1.5rem; /* Approx 24px - Poppins */
+  font-weight: 600; /* Semibold */
   color: var(--secondary-color);
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.right-side p { /* Instructional paragraph */
+  font-size: 0.95rem; /* Approx 15px - Poppins */
+  line-height: 1.6;
+  color: rgba(220, 220, 220, 0.85);
   margin-bottom: 20px;
+  /* width: 80%; /* Removed fixed width */
 }
 
 .right-side .input-box {
-  height: 50px;
+  height: 48px; /* Slightly reduced height */
   width: 100%;
-  margin: 12px 0;
+  margin: 15px 0; /* Consistent margin */
 }
 
 .right-side .input-box input,
 .right-side .input-box textarea {
   height: 100%;
   width: 100%;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
   outline: none;
-  font-size: 16px;
-  background: #f0f1f8;
-  border-radius: 6px;
+  font-size: 0.95rem; /* Approx 15px - Poppins */
+  font-weight: 400;
+  color: #333; /* Darker text for inputs */
+  background: #f0f1f8; /* Kept light background for inputs */
+  border-radius: 5px; /* Softer radius */
   padding: 0 15px;
   resize: none;
+  transition: border-color 0.3s ease;
+}
+.right-side .input-box input::placeholder,
+.right-side .input-box textarea::placeholder {
+    color: #666; /* Placeholder color */
+    font-weight: 400;
+}
+
+
+.right-side .input-box input:focus,
+.right-side .input-box textarea:focus {
+  border-color: var(--secondary-color); /* Highlight on focus */
 }
 
 .right-side .message-box {
-  min-height: 110px;
+  min-height: 120px; /* Adjusted height */
 }
 
 .right-side .input-box textarea {
-  padding-top: 6px;
+  padding-top: 12px; /* Adjusted padding */
 }
 
 .right-side .button {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 15px; /* Adjusted margin */
 }
 
 .right-side .button input[type="submit"] {
   color: #fff;
-  font-size: 18px;
+  font-size: 1rem; /* Approx 16px - Poppins */
+  font-weight: 500; /* Medium weight */
   outline: none;
   border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 10px 22px; /* Adjusted padding */
+  border-radius: 25px; /* More rounded */
   cursor: pointer;
   transition: all 0.3s ease;
   background: var(--secondary-color);
 }
 
 .button input[type="submit"]:hover {
-  background: rgb(119, 27, 51);
+  background: lighten(var(--secondary-color), 5%); /* Lighten on hover */
+  box-shadow: 0 2px 8px rgba(var(--secondary-color),0.4);
 }
 
-.right-side p,
-.right-side form {
-  width: 80%;
-}
+/* .right-side p, /* Removed fixed width for p and form */
+/* .right-side form { */
+/* width: 80%; */
+/* } */
 
-.right-side p {
-  margin-bottom: 20px;
-}
-
-.topic-text {
-  margin-top: 20px;
-}
+/* .topic-text { /* Removed as it's handled by .content .right-side .topic-text */
+/* margin-top: 20px; */
+/* } */
 
 @media (max-width: 950px) {
   .container {
     width: 90%;
-    padding: 30px 40px 40px 35px;
+    padding: 30px 35px; /* Adjusted padding */
   }
-
+  .container .content {
+    gap: 30px; /* Adjust gap */
+  }
+  .container .content .left-side {
+    width: 40%;
+  }
+  .content .left-side::before {
+    right: -15px;
+  }
   .container .content .right-side {
-    width: 75%;
-    margin-left: 55px;
+    width: 55%;
   }
 }
 
 @media (max-width: 820px) {
   .container {
-    margin: 40px 0;
-    height: 100%;
+    margin: 40px auto; /* Center container if it's not full width */
+    height: auto; /* Auto height */
   }
-
   .container .content {
     flex-direction: column-reverse;
   }
-
   .container .content .left-side {
     width: 100%;
-    flex-direction: row;
-    margin-top: 40px;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column; /* Stack details vertically */
+    margin-top: 30px;
+    align-items: flex-start; /* Align details to left */
+    gap: 20px; /* Gap between details */
+  }
+  .content .left-side .details {
+    text-align: left;
+    width: 100%; /* Full width for each detail block */
+  }
+  .content .left-side .details .text-one,
+  .content .left-side .details .text-two {
+    margin-left: 0; /* Reset indent as icon will be above */
+  }
+   .content .left-side .details .contact-ico {
+    display: block; /* Icon on its own line */
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+  .content .left-side .details .topic {
+    display: block; /* Topic on its own line */
   }
 
   .container .content .left-side::before {
-    display: none;
+    display: none; /* Hide separator line on mobile */
   }
-
   .container .content .right-side {
     width: 100%;
     margin-left: 0;
   }
-
-  .right-side p,
-  .right-side form {
-    width: 100%;
-  }
 }
 
-@media (max-width: 665px) {
-  .container .content .left-side {
-    flex-wrap: nowrap;
-    flex-direction: column;
+/* Removed max-width 665px rule as 820px already handles mobile layout well enough */
+/* If specific styling for very small screens is needed, it can be added here */
+@media (max-width: 480px) {
+  #contact {
+    padding: 40px 15px;
+  }
+  .container {
+    padding: 25px;
+  }
+  .content .right-side .topic-text {
+    font-size: 1.3rem;
+  }
+  .right-side p {
+    font-size: 0.9rem;
+  }
+  .right-side .input-box input, .right-side .input-box textarea {
+    font-size: 0.9rem;
+  }
+  .right-side .button input[type="submit"] {
+    font-size: 0.95rem;
+    padding: 10px 20px;
   }
 }

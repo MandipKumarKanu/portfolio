@@ -3,6 +3,7 @@
   color: #ffffff;
   position: relative;
   overflow: hidden;
+  padding: 50px 20px; /* Consistent with other sections */
 }
 
 #qualification::before {
@@ -16,60 +17,72 @@
     radial-gradient(white 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
-  opacity: 0.1;
-  z-index: 1;
+  opacity: 0.08; /* Consistent with About */
+  z-index: 1; /* Ensure it's behind content */
 }
 
 .qualification {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 40px 0;
+  /* padding: 40px 0; /* Padding moved to #qualification container */
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Ensure content is above ::before */
+  width: 100%;
+  max-width: 1200px; /* Consistent max-width */
+  margin: 0 auto; /* Center content */
 }
+
+/* .abt-top styles from about.css will apply for section title */
 
 .we-select {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 25px; /* Slightly reduced gap */
+  margin-bottom: 50px; /* Increased space after tabs */
+  margin-top: 20px; /* Space after section title */
 }
 
 .select {
-  padding: 12px 20px;
-  width: 180px;
+  padding: 10px 25px; /* Adjusted padding */
+  width: auto; /* Auto width based on content */
+  min-width: 160px; /* Minimum width */
   text-align: center;
-  border-radius: 50px;
+  border-radius: 30px; /* More rounded */
   cursor: pointer;
-  font-style: italic;
-  background: rgba(77, 64, 118, 0.3);
+  font-size: 1rem; /* Explicit font size - Poppins */
+  font-weight: 500; /* Medium weight */
+  background: rgba(77, 64, 118, 0.4); /* Slightly adjusted alpha */
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 8px; /* Adjusted gap */
+  border: 1px solid rgba(255,255,255,0.1); /* Subtle border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .select:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px); /* Subtle lift */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: rgba(77, 64, 118, 0.6);
 }
 
 .select.selected {
-  background: rgb(25, 20, 42);
+  background: var(--secondary-color); /* Use theme color */
   font-style: normal;
-  color: rgb(242, 183, 46);
-  transform: scale(1.05);
+  color: #fff; /* White text on theme color */
+  font-weight: 600; /* Bolder for selected */
+  transform: scale(1.03); /* Slightly less scale */
+  box-shadow: 0 5px 10px rgba(var(--secondary-color), 0.3);
 }
 
 .design-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 400px;
+  min-height: 350px; /* Adjusted min-height */
   width: 100%;
 }
 
@@ -79,16 +92,17 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 3px 1fr;
-  gap: 0 20px;
+  gap: 0 25px; /* Adjusted gap */
 }
 
 .timeline-component {
-  background: rgba(77, 64, 118, 0.3);
-  border-radius: 10px;
-  padding: 25px;
-  transition: all 0.4s ease;
+  background: rgba(38, 31, 61, 0.5); /* Darker, more subtle background */
+  border-radius: 8px; /* Softer radius */
+  padding: 20px; /* Adjusted padding */
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 20px; /* Add space between components in mobile view */
 }
 
 .timeline-component::before {
@@ -97,58 +111,72 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: rgb(120, 28, 52);
+  height: 3px; /* Thinner line */
+  background: var(--secondary-color); /* Use theme color */
+  border-radius: 8px 8px 0 0; /* Match container radius */
 }
 
 .timeline-component:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) scale(1.01); /* Subtle hover effect */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  border-color: rgba(var(--secondary-color),0.3);
 }
 
 .timeline-middle {
   position: relative;
-  background: var(--secondary-color);
+  background: rgba(var(--secondary-color), 0.5); /* Softer line color */
   width: 3px;
   height: 100%;
 }
 
 .timeline-circle {
   position: absolute;
-  top: 50%;
+  top: 20px; /* Align circle with top of component padding */
   left: 50%;
-  width: 15px;
-  height: 15px;
+  width: 13px; /* Slightly smaller */
+  height: 13px;
   border-radius: 50%;
   background: var(--secondary-color);
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, 0); /* Adjusted transform */
+  box-shadow: 0 0 8px rgba(var(--secondary-color), 0.5);
 }
 
-.timeline-content h3 {
+.timeline-content h3 { /* Qualification Title e.g., BCA */
   color: var(--secondary-color);
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* Adjusted margin */
+  font-size: 1.2rem;   /* Approx 19px - Poppins */
+  font-weight: 600;    /* Poppins semibold */
 }
 
-.edu-name a {
+.timeline-content .edu-name { /* Institution/Company Name */
+  font-size: 1rem;      /* Approx 16px - Poppins */
+  font-weight: 500;     /* Poppins medium */
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 6px;   /* Adjusted margin */
+}
+
+.timeline-content .edu-name a {
   text-decoration: none;
+  color: inherit; /* Inherit color from .edu-name */
   transition: color 0.3s ease;
 }
 
-.edu-name a:hover {
+.timeline-content .edu-name a:hover {
   color: var(--secondary-color);
 }
 
-.edu-date {
-  color: #9f9c9c;
+.timeline-content .edu-date { /* Date */
+  color: rgba(220, 220, 220, 0.7); /* Softer date color */
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px; /* Adjusted gap */
+  font-size: 0.85rem; /* Approx 13-14px - Poppins */
+  font-weight: 400; /* Poppins regular */
 }
 
 .work,
 .edu {
-  display: none;
+  display: none; /* Handles tab switching */
 }
 
 .timeline.work.selected,
@@ -159,7 +187,7 @@
 @media (max-width: 768px) {
   .timeline {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 0; /* Remove gap as timeline-middle is hidden */
   }
 
   .design-section {
@@ -170,17 +198,46 @@
   .timeline-empty {
     display: none;
   }
+  
+  .timeline-component {
+    margin-bottom: 20px; /* Ensure spacing in single column */
+  }
+  .timeline-component:last-child {
+    margin-bottom: 0;
+  }
+
 
   .design-section {
-    justify-content: start;
+    justify-content: flex-start; /* Align to start */
   }
 
   .we-select {
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 30px; /* Adjust margin */
   }
 
   .select {
-    width: 250px;
+    width: 220px; /* Adjust width */
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #qualification {
+    padding: 40px 15px;
+  }
+  .timeline-content h3 {
+    font-size: 1.1rem;
+  }
+  .timeline-content .edu-name {
+    font-size: 0.95rem;
+  }
+  .timeline-content .edu-date {
+    font-size: 0.8rem;
+  }
+  .select {
+    width: 100%;
+    max-width: 250px; /* Max width for select buttons on mobile */
   }
 }

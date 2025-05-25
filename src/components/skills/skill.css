@@ -3,115 +3,196 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 50px 20px; /* Consistent with About section padding */
 }
 
+/* Reused .abt-top styles from about.css will apply here for section title */
+/* If specific overrides are needed for .skill .abt-top, they can be added */
+
 .skill-btm {
-  width: 70%;
+  width: 100%; /* Full width for better responsiveness */
+  max-width: 800px; /* Max width for content */
+  margin-top: 20px; /* Space below section title */
 }
 
 .skill-summary {
-  font-size: 24px;
+  /* font-size: 24px; /* Removed specific font-size from container */
   color: #fff;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 8px; /* Slightly larger radius */
+  padding: 12px 18px; /* Adjusted padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 15px;
+  margin-bottom: 10px; /* Reduced margin */
   transition: background-color 0.3s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+.skill-summary h4.skillll { /* Targeting the h4 directly */
+  font-size: 1.2rem; /* Adjusted size (approx 19-20px) */
+  font-weight: 500; /* Poppins medium weight */
+  margin: 0; /* Reset margin for h4 */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+}
+
+.skill-summary h4.skillll .fa-code { /* Targeting icon within h4 */
+  font-size: 1.1rem; /* Adjust icon size if needed */
 }
 
 .ans {
-  margin: 0 50px;
+  margin: 0 10px 15px 10px; /* Reduced horizontal margin, added bottom margin */
   overflow: hidden;
-  max-height: 0; /* Initially closed */
-  transition: max-height 0.3s ease-in-out;
+  max-height: 0;
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; /* Added padding transition */
+  border-left: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0 0 8px 8px;
+  padding: 0 15px; /* Padding will apply when open */
+  background-color: rgba(0,0,0,0.1);
 }
 
 .ans.open {
-  max-height: 400px; /* Adjust as needed for opened state */
+  max-height: 500px; /* Increased max-height for content */
+  padding: 20px 15px; /* Add padding when open */
 }
 
-.name {
+.name { /* Container for skill name and percentage */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1rem; /* Base size for skill name text - Poppins */
+  font-weight: 400; /* Poppins regular */
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name .ico-name { /* Skill name and its icon */
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Adjusted gap */
+}
+
+.name .ico-name span { /* Icon container */
+  font-size: 1.3rem; /* Adjusted icon size */
+  color: var(--secondary-color); /* Use theme color for icon */
+}
+
+.name > div:last-child { /* Percentage text */
+  font-size: 0.9rem; /* Smaller size for percentage */
+  font-weight: 500; /* Medium weight */
+  color: rgba(220, 220, 220, 0.9);
 }
 
 .ans1 {
-  margin-bottom: 15px;
+  margin-bottom: 18px; /* Adjusted margin */
+  transition: transform 0.2s ease-out;
+  padding: 8px; /* Adjusted padding */
+  border-radius: 5px;
+}
+
+.ans1:hover {
+  transform: translateY(-3px) scale(1.03); /* Adjusted scale for subtlety */
+  background-color: rgba(var(--secondary-color), 0.1); /* Subtle hover background */
+}
+
+.ans1:last-child {
+  margin-bottom: 0; /* Remove margin from last skill item in a category */
 }
 
 progress {
   width: 100%;
-  height: 20px;
-  margin-top: 10px;
-  background-color: rgb(77, 64, 118);
-  border-radius: 50px;
+  height: 10px; /* Slimmer progress bar */
+  margin-top: 8px; /* Adjusted margin */
+  background-color: rgba(255, 255, 255, 0.15); /* Lighter track color */
+  border-radius: 5px; /* Rounded corners */
   overflow: hidden;
+  border: none; /* Remove default border */
+}
+
+progress::-webkit-progress-bar { /* For Chrome/Safari */
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
 }
 
 progress::-webkit-progress-value {
-  background-color: rgb(77, 64, 118);
+  background-color: var(--secondary-color); /* Use theme color for progress */
+  border-radius: 0px; /* Ensure it fills from left */
+  transition: width 0.5s ease-in-out;
+}
+progress::-moz-progress-bar { /* For Firefox */
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  transition: width 0.5s ease-in-out;
 }
 
-.ico-name {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
 
-.ico-name span {
-  font-size: 25px;
-}
-
-.skill-out {
+.skill-out { /* This class seems to wrap skill-btm, might be redundant or for specific layout */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 38px;
+  padding: 0; /* Removed padding as skill-btm controls width and skill adds overall padding */
 }
 
-.skill-summary:hover {
-  background-color: rgb(77, 64, 118);
-}
-
+.skill-summary:hover,
 .skill-summary.opened {
-  background-color: rgb(77, 64, 118);
+  background-color: rgb(50, 42, 80); /* Slightly adjusted hover/open color */
+  border-color: rgba(var(--secondary-color), 0.3);
 }
 
+.drop-down { /* Class for the caret icon */
+  transition: transform 0.3s ease-in-out;
+}
 .drop-down.rotate {
   transform: rotate(-180deg);
 }
 
 hr {
   border: none;
-  border-top: 1px solid #444;
-  margin: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.1); /* Softer hr */
+  margin: 25px 0; /* Adjusted margin */
 }
 
 @media (max-width: 834px) {
-  progress {
-    height: 10px;
-  }
-
-  .skill-out {
-    padding: 0;
-  }
-
   .skill-btm {
-    width: 100%;
+    width: 95%; /* Increase width for tablets */
   }
 
   .ans {
-    margin: 0 20px;
+    margin: 0 5px 15px 5px; /* Further reduce horizontal margin */
   }
 
-  .skillll {
-    font-size: 1.1rem;
+  .skill-summary h4.skillll {
+    font-size: 1.1rem; /* Adjust for tablets */
+  }
+  .name {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill {
+    padding: 40px 15px; /* Adjust padding for mobile */
+  }
+  .skill-btm {
+    width: 100%;
+  }
+  .skill-summary h4.skillll {
+    font-size: 1rem; /* Adjust for mobile */
+  }
+   .name {
+    font-size: 0.9rem;
+  }
+  .name .ico-name span {
+    font-size: 1.2rem; /* Adjust icon size for mobile */
+  }
+   .ans {
+    padding: 15px 10px;
+  }
+  .ans.open {
+     padding: 15px 10px;
   }
 }
