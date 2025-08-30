@@ -12,6 +12,8 @@ const Project = () => {
   const [error, setError] = useState(null);
   const [previewProject, setPreviewProject] = useState(null);
   const [previewPosition, setPreviewPosition] = useState({ x: 0, y: 0 });
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,6 +79,17 @@ const Project = () => {
 
   const handleMouseEnter = (project, index, event) => {
     setActiveProject(index);
+    
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    
+    if (previewProject && (!project.link || !project.isLive)) {
+      setPreviewProject(null);
+      setPreviewLoading(false);
+    }
+    
     if (project.link && project.isLive && window.innerWidth >= 1024) {
       const rect = event.currentTarget.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
@@ -99,21 +112,48 @@ const Project = () => {
       y = Math.max(20, y);
       
       setPreviewPosition({ x, y });
+      setPreviewLoading(true);
       
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         setPreviewProject(project);
-      }, 200);
+        setPreviewLoading(false);
+      }, 1000);
+      
+      setHoverTimeout(timeout);
     }
   };
 
   const handleMouseLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+      setPreviewLoading(false);
+    }
+    
+    if (!previewProject) {
+      setActiveProject(null);
+    }
+  };
+
+  const handleProjectSectionMouseLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+      setPreviewLoading(false);
+    }
+    
     if (!previewProject) {
       setActiveProject(null);
     }
   };
 
   const closePreview = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
     setPreviewProject(null);
+    setPreviewLoading(false);
     setActiveProject(null);
   };
 
@@ -177,7 +217,10 @@ const Project = () => {
         ))}
       </div>
 
-      <div className="project-grid">
+      <div 
+        className="project-grid"
+        onMouseLeave={handleProjectSectionMouseLeave}
+      >
         {filteredProjects.map((project, index) => (
           <div
             key={index}
@@ -237,7 +280,7 @@ const Project = () => {
         ))}
       </div>
 
-      {previewProject && windowWidth >= 1024 && (
+      {(previewProject || previewLoading) && windowWidth >= 1024 && (
         <>
           <div 
             className="project-preview-iframe active"
@@ -257,7 +300,9 @@ const Project = () => {
                   <span className="iframe-control minimize-btn"></span>
                   <span className="iframe-control maximize-btn"></span>
                 </div>
-                <span className="iframe-url">{previewProject.link}</span>
+                <span className="iframe-url">
+                  {/* {previewLoading ? 'Loading preview...' : previewProject?.link} */}
+                </span>
                 <button 
                   className="iframe-close-text"
                   onClick={closePreview}
@@ -274,13 +319,20 @@ const Project = () => {
                   ✕
                 </button>
               </div>
-              <iframe
-                src={previewProject.link}
-                title={`Preview of ${previewProject.title}`}
-                className="iframe-content"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-top-navigation"
-                loading="lazy"
-              />
+              {previewLoading ? (
+                <div className="iframe-loading">
+                  {/* <div className="loading-spinner"></div> */}
+                  <p>Loading preview...</p>
+                </div>
+              ) : (
+                <iframe
+                  src={previewProject.link}
+                  title={`Preview of ${previewProject.title}`}
+                  className="iframe-content"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-top-navigation"
+                  loading="lazy"
+                />
+              )}
             </div>
           </div>
         </>
