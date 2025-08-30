@@ -102,7 +102,6 @@ const Skill = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
-    // If the clicked index is already open, close it, otherwise set it as open
     setOpenIndex(openIndex === index ? null : index);
   };
 

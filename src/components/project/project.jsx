@@ -1,112 +1,158 @@
 import { useState, useEffect } from "react";
 import { Code, Link as LinkIcon } from "lucide-react";
+import { getProjects } from "../../firebase/projectService";
 import "./project.css";
 
-const projects = [
-  {
-    image: "https://i.ibb.co/ZMqR4VJ/image.png",
-    title: "Radio Neptune",
-    description:
-      "Stream your favorite Nepali radio stations online, anytime, anywhere!",
-    link: "https://nep-tune.web.app/",
-    gitLink: "https://github.com/MandipKumarKanu/radio-station",
-    tags: ["React", "Firebase", "Streaming"],
-    category: "Personal",
-  },
-  {
-    image: "https://i.ibb.co/bXknhxR/image.png",
-    title: "Library Management System",
-    description: null,
-    note: "Demo credentials: test@gmail.com / test123",
-    link: "https://library-management-system-tan.vercel.app/login",
-    gitLink: "https://github.com/MandipKumarKanu/library-management-system",
-    tags: ["React", "Firebase", "Auth"],
-    category: "Personal",
-  },
-  {
-    image: "https://i.ibb.co/T46J8jz/image.png",
-    title: "Ur Weather",
-    description:
-      "A sleek and minimalist app delivering real-time weather updates effortlessly.",
-    link: "https://ur-weather.web.app/",
-    gitLink: "https://github.com/MandipKumarKanu/ur-weather",
-    tags: ["React", "Weather API", "React Query"],
-    category: "Personal",
-  },
-  {
-    image: "https://i.ibb.co/511K9cW/image.png",
-    title: "Remote Mouse Controller",
-    description: "Turn your phone into a wireless trackpad for your computer",
-    gitLink: "https://github.com/MandipKumarKanu/remote-mouse-controller",
-    tags: ["Node.js", "Socket.io", "Mobile"],
-    category: "Personal",
-  },
-  {
-    image: "https://i.ibb.co/rMrqwSs/image.png",
-    title: "Kitab Kunj",
-    description:
-      "KitabKunj is a platform where you can buy, sell, rent, or donate books",
-    link: "https://kitab-kunj.web.app/",
-    gitLink: "https://github.com/MandipKumarKanu/kitab-kunj-firebase",
-    tags: ["React", "E-commerce", "Payment"],
-    category: "Personal",
-  },
-  {
-    image: "https://i.ibb.co/ZTJKfPd/image.png",
-    title: "Corporate Website",
-    description: "Lennobyte Solutions",
-    link: "https://lennobyte.com/",
-    gitLink: null,
-    tags: ["React"],
-    category: "Professional",
-  },
-  {
-    image: "https://i.ibb.co/x8w2jMx/image.png",
-    title: "LennoLabs+",
-    description: "Interactive UI for lab operations",
-    link: "https://labsplus.lennobyte.com/",
-    gitLink: null,
-    tags: ["React", "Tailwind CSS"],
-    category: "Professional",
-  },
-  {
-    image: "https://i.ibb.co/qJtKpVJ/image.png",
-    title: "Operation Record Book",
-    description: "Interactive UI for hospital's operations record book",
-    link: "https://operationrecord.lennobyte.com/",
-    gitLink: null,
-    tags: ["React", "Tailwind CSS"],
-    category: "Professional",
-  },
-  {
-    image: "https://i.ibb.co/BcZj8hb/image.png",
-    title: "School Management System",
-    description: "Interactive UI for School CRM",
-    link: "https://mypathshala.lennobyte.com/",
-    gitLink: null,
-    tags: ["React", "Tailwind CSS"],
-    category: "Professional",
-  },
-];
-
 const Project = () => {
+  const [projects, setProjects] = useState([]);
   const [activeProject, setActiveProject] = useState(null);
   const [activeTab, setActiveTab] = useState("All");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [previewProject, setPreviewProject] = useState(null);
+  const [previewPosition, setPreviewPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      const newWidth = window.innerWidth;
+      setWindowWidth(newWidth);
+      
+      if (newWidth < 1024 && previewProject) {
+        setPreviewProject(null);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && previewProject) {
+        closePreview();
+      }
+    };
+
+    const handleClickOutside = (event) => {
+      if (previewProject) {
+        const iframe = document.querySelector('.project-preview-iframe');
+        const activeCard = document.querySelector('.project-card.active');
+        
+        if (iframe && !iframe.contains(event.target) && 
+            activeCard && !activeCard.contains(event.target)) {
+          closePreview();
+        }
+      }
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("click", handleClickOutside);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [previewProject]);
+
+  useEffect(() => {
+    loadProjects();
   }, []);
+
+  const loadProjects = async () => {
+    try {
+      setLoading(true);
+      const projectsData = await getProjects();
+      setProjects(projectsData);
+    } catch (err) {
+      console.error('Error loading projects:', err);
+      setError('Failed to load projects');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredProjects =
     activeTab === "All"
       ? projects.slice(0, windowWidth < 768 ? 4 : 8)
       : projects.filter((project) => project.category === activeTab);
+
+  const handleMouseEnter = (project, index, event) => {
+    setActiveProject(index);
+    if (project.link && project.isLive && window.innerWidth >= 1024) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const iframeWidth = 600;
+      const iframeHeight = 450;
+      
+      let x = rect.right + 20;
+      let y = rect.top;
+      
+      if (x + iframeWidth > viewportWidth) {
+        x = rect.left - iframeWidth - 20;
+      }
+      
+      if (y + iframeHeight > viewportHeight) {
+        y = viewportHeight - iframeHeight - 20;
+      }
+      
+      x = Math.max(20, x);
+      y = Math.max(20, y);
+      
+      setPreviewPosition({ x, y });
+      
+      setTimeout(() => {
+        setPreviewProject(project);
+      }, 200);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!previewProject) {
+      setActiveProject(null);
+    }
+  };
+
+  const closePreview = () => {
+    setPreviewProject(null);
+    setActiveProject(null);
+  };
+
+  if (loading) {
+    return (
+      <section id="project" className="project-section">
+        <div className="project-header">
+          <h2 className="project-title">My Projects</h2>
+          <p className="project-subtitle">
+            Innovative solutions and creative digital experiences crafted with
+            passion
+          </p>
+        </div>
+        <div className="project-loading">
+          <div className="loading-spinner"></div>
+          <p>Loading projects...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="project" className="project-section">
+        <div className="project-header">
+          <h2 className="project-title">My Projects</h2>
+          <p className="project-subtitle">
+            Innovative solutions and creative digital experiences crafted with
+            passion
+          </p>
+        </div>
+        <div className="project-error">
+          <p>Error loading projects: {error}</p>
+          <button onClick={loadProjects} className="retry-button">
+            Retry
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="project" className="project-section">
@@ -135,10 +181,10 @@ const Project = () => {
           <div
             key={index}
             className={`project-card ${
-              activeProject === index ? "active" : ""
+              activeProject === index || (previewProject && previewProject === project) ? "active" : ""
             }`}
-            onMouseEnter={() => setActiveProject(index)}
-            onMouseLeave={() => setActiveProject(null)}
+            onMouseEnter={(e) => handleMouseEnter(project, index, e)}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="project-image-container">
               <img
@@ -189,6 +235,55 @@ const Project = () => {
           </div>
         ))}
       </div>
+
+      {previewProject && windowWidth >= 1024 && (
+        <>
+          <div 
+            className="project-preview-iframe active"
+            style={{
+              left: `${previewPosition.x}px`,
+              top: `${previewPosition.y}px`
+            }}
+          >
+            <div className="iframe-container">
+              <div className="iframe-header">
+                <div className="iframe-controls">
+                  <span 
+                    className="iframe-control close-btn"
+                    onClick={closePreview}
+                    style={{ cursor: 'pointer' }}
+                  ></span>
+                  <span className="iframe-control minimize-btn"></span>
+                  <span className="iframe-control maximize-btn"></span>
+                </div>
+                <span className="iframe-url">{previewProject.link}</span>
+                <button 
+                  className="iframe-close-text"
+                  onClick={closePreview}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#999',
+                    cursor: 'pointer',
+                    fontSize: '12px',
+                    marginLeft: 'auto',
+                    padding: '5px'
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+              <iframe
+                src={previewProject.link}
+                title={`Preview of ${previewProject.title}`}
+                className="iframe-content"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-top-navigation"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </>
+      )}
 
       {((projects.length > 4 && windowWidth < 768) ||
         (projects.length > 8 && windowWidth >= 768)) && (

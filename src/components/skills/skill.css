@@ -26,12 +26,12 @@
 .ans {
   margin: 0 50px;
   overflow: hidden;
-  max-height: 0; /* Initially closed */
+  max-height: 0;
   transition: max-height 0.3s ease-in-out;
 }
 
 .ans.open {
-  max-height: 400px; /* Adjust as needed for opened state */
+  max-height: 400px;
 }
 
 .name {
