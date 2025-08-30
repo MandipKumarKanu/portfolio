@@ -61,6 +61,7 @@ const Project = () => {
       setLoading(true);
       const projectsData = await getProjects();
       setProjects(projectsData);
+      console.log(projectsData)
     } catch (err) {
       console.error('Error loading projects:', err);
       setError('Failed to load projects');
@@ -219,7 +220,7 @@ const Project = () => {
                     </a>
                   )}
                   {project.gitLink && (
-                    <agit
+                    <a
                       href={project.gitLink}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -227,7 +228,7 @@ const Project = () => {
                     >
                       <Code size={20} />
                       Code
-                    </agit>
+                    </a>
                   )}
                 </div>
               </div>
