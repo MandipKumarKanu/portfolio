@@ -219,7 +219,7 @@ const Project = () => {
                     </a>
                   )}
                   {project.gitLink && (
-                    <a
+                    <agit
                       href={project.gitLink}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -227,7 +227,7 @@ const Project = () => {
                     >
                       <Code size={20} />
                       Code
-                    </a>
+                    </agit>
                   )}
                 </div>
               </div>
